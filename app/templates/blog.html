@@ -1,0 +1,55 @@
+{% extends "app.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+
+        <header class="masthead" style="background-image: url('/static/assets/img/home-bg.jpg')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="site-heading">
+                            <h1>Geeky Blog </h1>
+                            <span class="subheading">A Blog For People Who Know Binary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    {% for post in posts %}
+                    <div class="post-preview">
+                        <a href="/blog/post/{{post.slug}}">
+                            <h2 class="post-title"> {{post.title}} </h2>
+                            <h3 class="post-subtitle"> {{post.description|truncatewords:15}} </h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!"> {{post.author}} </a>
+                            <!-- on September 24, 2021 -->
+                            {{post.publish}}
+                        </p>
+                    </div>
+                    <hr />
+                    {% endfor %}
+                    <!-- Pager-->
+                    <a href="/">
+                        <button class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            </svg>
+                                Back To Home
+                            </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        {% endblock content %}

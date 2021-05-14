@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="app" class="container">
+	
+    <div class="row d-flex justify-content-center">
+    	<div class="col-md-10 mt-5 pt-5">
+    		<div class="row z-depth-3">
+    			<div class="col-sm-4 bg-info rounded">
+    				<div v-for='avatar in Avatar' class="card-block text-center text-white pt-3">
+    					<img :src="baseMedia + avatar.avatarImage" alt="Profile" class="img-thumbnail rounded-circle">
+    					<h2 class="font-weight-bold mt-4 text-capitalize"> 
+                            {% verbatim %}
+                                {{username}}
+                            {% endverbatim %}
+                         </h2>
+    					<p></p>
+
+    				</div>
+    			</div>
+    			<div class="col-sm-8 bg-white rounded-right">
+    				<h3 class="mt-3 text-center text-capitalize"> {{user.username}}'s Profile </h3>
+    				<hr class="badge-primary mt-0 w-25">
+    				
+    				<div class="row">
+    					<div class="col-sm-6">
+    						<p class="font-weight-bold">Name:</p>
+    						<h6 class="text-muted">{{prof.name}}</h6>
+    					</div>
+    					<div class="col-sm-6">
+    						<p class="font-weight-bold">LastName:</p>
+    						<h6 class="text-muted">{{prof.lastname}}</h6>
+    					</div>
+    				</div>
+    				<hr class="badge-light mt-0">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <button class="btn btn-block btn-danger">
+                            Message
+                        </button>
+                        
+                    </div>
+                </div>
+    			</div>
+
+    			</div>
+    			
+    		</div>
+    	</div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="/static/js/prof.js"></script>
+{% endblock js %}

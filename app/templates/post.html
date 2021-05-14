@@ -1,0 +1,133 @@
+{% extends "app.html" %}
+
+{% block title %}
+    {{post.title}}
+{% endblock title %}
+
+{% block content %}
+    
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/media/{{post.thumbnail}}')">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="post-heading">
+                            <h1> 
+                                {{post.title}}
+                             </h1>                          
+                            <h2 class="subheading"> {{post.description|safe}} </h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#"> {{post.author}} </a>
+                                on {{post.publish}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+    
+        <article>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto">                     
+                            {{post.body_text|safe}}
+                    </div>
+                </div>
+            </div>
+            
+        </article>
+        <hr />
+        <!-- <div class="container-fluid mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="headings d-flex justify-content-between align-items-center mb-3">
+                <h5> Comments: </h5>
+                <div class="buttons">  </div>
+            </div>
+            {% for com in post.comments %}
+                <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user d-flex flex-row align-items-center"> 
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="p-3 row">
+
+                                        <img src="/media/avatars/freedom.jpeg" width="85" class="user-img rounded-circle mr-2  mt-0 pt-0"> 
+                                        <div class="font-weight-bold text-primary ml-2 mt-1 text-center pt-4 pb-4 text-capitalize"> {{com.author}} </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 mt-1">
+                                 
+
+                                <div class="font-weight-bold p-11"> {{com.body}} sddddddaaaaaaaaaaaaaaaaaaaaaaa</div>
+                                </div>
+                            </div>
+                             
+                            </div>
+                    </div>
+                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                        <div class="reply px-4"> </div>
+                        <div class="icons align-items-center">  </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+</div> -->
+    
+<div class="container">
+{% if user.is_authenticated %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="exampleFormControlTextarea1">Post A Comment
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+</svg></span>
+        </label>
+        <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <button class="btn btn-success btn-block">Post!</button>
+      </div>
+    </form>
+{% else %}
+    <div class="alert alert-info">
+        Login To Share Your Own Comment
+    </div>
+
+{% endif %}
+  <hr>
+    <h2>Comments
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
+  <path d="M0 7.76C0 3.301 3.493 0 8 0s8 3.301 8 7.76-3.493 7.76-8 7.76c-.81 0-1.586-.107-2.316-.307a.639.639 0 0 0-.427.03l-1.588.702a.64.64 0 0 1-.898-.566l-.044-1.423a.639.639 0 0 0-.215-.456C.956 12.108 0 10.092 0 7.76zm5.546-1.459-2.35 3.728c-.225.358.214.761.551.506l2.525-1.916a.48.48 0 0 1 .578-.002l1.869 1.402a1.2 1.2 0 0 0 1.735-.32l2.35-3.728c.226-.358-.214-.761-.551-.506L9.728 7.381a.48.48 0 0 1-.578.002L7.281 5.98a1.2 1.2 0 0 0-1.735.32z"/>
+</svg>
+        </span>
+    </h2>
+    <br>
+    {% for comment in post.comments %}
+    <div class="card pb-2 pr-2">
+        <div class="row">
+            <div class="pl-3 ml-2 mt-1 col">
+                <img width='90' class=" rounded-circle img-thumbnail" src="/media/{{comment.authorIMG}}" alt=""> <span class="pl-2 text-primary text-capitalize">{{comment.author}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pl-4 ml-2 mt-2 col-12">
+                {{comment.body}}
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+        <hr />
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Profile ~ {{user.username}}
+{% endblock title %}
+
+{% block content %}
+<br>
+<div id="app" class="container">
+  <div class="row border" style="border-width:3px !important; padding-top: 3rem; border-radius: 0.75rem 0.75rem; background-color: white!important;">
+    <div v-for='avatar in Avatar' class="p-3 col-sm-5" style="padding-top: 3.5rem !important">
+        <img class="img-fluid rounded-circle mx-auto d-block" v-bind:src="baseMedia + avatar.avatarImage" style="width: 18rem;">
+    </div>
+    <div class="col-sm-7" style="padding: 6rem; padding: 6rem 2rem; padding-top: 2rem">
+        <h2 class="text-capitalize"> 
+            {{user.username}}
+         </h2>
+        <form method="POST">
+        {% csrf_token %}
+        
+
+        <div id="div_id_name" class="form-group"> 
+            <label for="id_name" class=" requiredField">
+                Name<span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input value="{{data.name}}" type="text" name="name" maxlength="100" class="textinput textInput form-control" required id="id_name"> 
+            </div> 
+        </div> 
+        <div id="div_id_lastname" class="form-group"> 
+            <label for="id_lastname" class=" requiredField">
+                Lastname<span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <input value="{{data.lastname}}" type="text" name="lastname" maxlength="100" class="textinput textInput form-control" required id="id_lastname"> 
+            </div> 
+        </div> 
+        <div id="div_id_avatar" class="form-group"> 
+            <label for="id_avatar" class=" requiredField">
+                Avatar<span class="asteriskField">*</span> 
+            </label> 
+            <div class=""> 
+                <select v-model="avator" name="avatar" class="custom-select form-control" required id="id_avatar"> 
+                    <option value="{{data.avatar}}" selected> {% verbatim %}
+                        {{avator}}
+                    {% endverbatim %} </option> 
+                 
+                    <option v-for="av in Choices" :value="av.avatar"> {% verbatim %}
+                        {{av.avatar}}
+                    {% endverbatim %} </option>
+                    
+                   
+                </select> 
+                </div> 
+                </div>
+      <input type="submit" class="btn btn-success btn-block" type="button" value="Save">
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+    <script src="/static/js/app.js"></script>
+{% endblock js %}
