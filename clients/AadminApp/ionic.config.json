@@ -1,7 +1,0 @@
-{
-  "name": "AadminApp",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue"
-}
