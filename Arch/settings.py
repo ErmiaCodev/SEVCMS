@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 
 # Devel
 STATICFILES_DIRS = [
-    '/home/ermia/WebApp/static/',
+    os.path.join(BASE_DIR, 'static/'),
 ]
 
 MEDIA_URL = '/media/'
